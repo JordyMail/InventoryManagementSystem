@@ -1,5 +1,6 @@
 package com.example.inventorymanagementsystem;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,7 +59,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // View Button Listener
-        viewButton.setOnClickListener(v -> fetchData());
+        viewButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ViewInventoryActivity.class);
+            startActivity(intent);
+        });
+
 
         // Update Button Listener
         updateButton.setOnClickListener(v -> {
