@@ -1,108 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F5F5F5">
+    tools:context=".MainActivity">
 
-    <!-- Title -->
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inventory Management System"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="8dp"
-        android:background="#6200EE"
-        android:textColor="#FFFFFF" />
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Input Section -->
-    <EditText
-        android:id="@+id/item_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Item Name"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
-        android:background="@android:drawable/editbox_background" />
-
-    <EditText
-        android:id="@+id/item_quantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Quantity"
-        android:inputType="number"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:background="@android:drawable/editbox_background" />
-
-    <EditText
-        android:id="@+id/item_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Price"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:background="@android:drawable/editbox_background" />
-
-    <!-- Buttons Section -->
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Item"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#03A9F4"
-        android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/btn_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View Inventory"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#8BC34A"
-        android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/btn_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update Item"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#FFC107"
-        android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/btn_delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete Item"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#F44336"
-        android:textColor="#FFFFFF" />
-
-    <!-- Table Section -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
-        <TableLayout
-            android:id="@+id/table_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1"
-            android:background="#FFFFFF"
-            android:padding="8dp"
-            android:scrollbars="vertical">
-        </TableLayout>
-    </ScrollView>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

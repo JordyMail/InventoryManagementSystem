@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "599253398952",
+    "project_id": "invetorymanagementsystem-65cad",
+    "storage_bucket": "invetorymanagementsystem-65cad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599253398952:android:f65d6b8a8e2b7020bc999d",
+        "android_client_info": {
+          "package_name": "com.example.invetorymanagementsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5KqKXdNMnWQzbdcwoI51PfDj8iMxvlqw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,108 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <!-- Header Section -->
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Add New Group"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:contentDescription="Back Button" />
+
+    <!-- Add Photo Section -->
+    <TextView
+        android:id="@+id/add_photo_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Group Photo"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/header_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <ImageView
+        android:id="@+id/group_photo_placeholder"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_add_photo"
+        android:contentDescription="Add Group Photo Placeholder"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/add_photo_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Group Name -->
+    <EditText
+        android:id="@+id/group_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Group Name"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/group_photo_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <!-- Group Place -->
+    <Spinner
+        android:id="@+id/group_place"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/group_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <!-- Group Description -->
+    <EditText
+        android:id="@+id/group_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Group Description"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@+id/group_place"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/save_group_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Save Group"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        app:layout_constraintTop_toBottomOf="@+id/group_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
