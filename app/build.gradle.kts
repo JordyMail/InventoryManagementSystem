@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.invetorymanagementsystem"
+    namespace = "com.example.inventorymanagement"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.invetorymanagementsystem"
+        applicationId = "com.example.inventorymanagement"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -33,18 +33,17 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
-    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+    implementation("androidx.core:core-ktx:1.12.0") // Core KTX untuk FileProvider
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
-    // Firebase BOM and Firebase Authentication (Kotlin DSL syntax)
-    implementation(platform("com.google.firebase:firebase-bom:32.1.1")) // Use the latest version
-    implementation("com.google.firebase:firebase-auth")
 }
+
+apply(plugin = "com.google.gms.google-services") // Aktifkan plugin Google Services

@@ -1,0 +1,73 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@drawable/bginventory">
+
+    <LinearLayout
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:background="#C0FFFFFF">
+
+        <!-- Camera Icon or Photo Area -->
+        <ImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="225dp"
+            android:layout_height="150dp"
+            android:src="@drawable/merah"
+            android:contentDescription="Add Photo"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Item Name Input -->
+        <EditText
+            android:id="@+id/etItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Item Name"
+            android:layout_marginBottom="12dp"
+            android:inputType="textPersonName"
+            android:textStyle="bold"/>
+
+        <!-- Place Input -->
+        <EditText
+            android:id="@+id/etPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Place"
+            android:layout_marginBottom="12dp"
+            android:inputType="text"
+            android:textStyle="bold"/>
+
+        <!-- Description Input -->
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description Inventory"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:lines="4"
+            android:textStyle="bold"/>
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#22577A"
+            android:padding="15dp"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+</ScrollView>

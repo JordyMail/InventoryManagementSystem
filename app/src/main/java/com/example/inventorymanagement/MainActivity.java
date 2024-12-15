@@ -1,4 +1,4 @@
-package com.example.invetorymanagementsystem;
+package com.example.inventorymanagement;
 
 import android.os.Bundle;
 

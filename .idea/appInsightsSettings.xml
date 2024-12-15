@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.example.invetorymanagementsystem" />
-                  <option name="mobileSdkAppId" value="1:599253398952:android:f65d6b8a8e2b7020bc999d" />
-                  <option name="projectId" value="invetorymanagementsystem-65cad" />
-                  <option name="projectNumber" value="599253398952" />
+                  <option name="appId" value="com.example.inventorymanagement" />
+                  <option name="mobileSdkAppId" value="1:571520473768:android:9781dba5899cb1a492809d" />
+                  <option name="projectId" value="inventory-management-e0f7f" />
+                  <option name="projectNumber" value="571520473768" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

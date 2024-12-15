@@ -1,0 +1,40 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_menu">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+
+    android:elevation="4dp"
+    android:layout_centerInParent="true"
+
+    android:gravity="center">
+
+
+    <Button
+        android:id="@+id/btnAddInventory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Inventory"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#80FFFFFF"
+        android:textSize="20dp"
+        android:textColor="#22577A"
+        android:padding="20dp" />
+
+    <Button
+        android:id="@+id/btnViewInventory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Inventory"
+        android:backgroundTint="#8022577A"
+        android:textSize="20dp"
+        android:padding="20dp" />
+</LinearLayout>
+</RelativeLayout>

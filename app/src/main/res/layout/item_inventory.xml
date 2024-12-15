@@ -1,0 +1,34 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_centerInParent="true"
+    android:layout_marginLeft="8dp"
+    android:padding="8dp"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- TextView untuk Nama Item -->
+    <TextView
+        android:id="@+id/tvItemName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="Item Name"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:padding="4dp" />
+
+    <!-- Tombol Hapus -->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:text="Delete"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#22577A"
+        android:contentDescription="Hapus item ini" />
+</LinearLayout>
