@@ -1,13 +1,22 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_menu"
+    android:orientation="vertical">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="600dp"
+    android:background="#80FFFFFF"
+    android:gravity="center"
+    android:layout_centerInParent="true" >
+
+<LinearLayout
     android:layout_width="400dp"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center"
-    android:layout_centerInParent="true"
-    android:layout_marginLeft="8dp"
-    android:padding="8dp"
-    android:background="?attr/selectableItemBackground">
+    android:padding="12dp"
+    android:layout_centerInParent="false" >
 
     <!-- TextView untuk Nama Item -->
     <TextView
@@ -18,8 +27,9 @@
         android:gravity="center_vertical"
         android:text="Item Name"
         android:textSize="16sp"
-        android:textColor="@color/black"
-        android:padding="4dp" />
+        android:textColor="#22577A"
+        android:padding="4dp"
+        android:textStyle="bold" />
 
     <!-- Tombol Hapus -->
     <Button
@@ -32,3 +42,5 @@
         android:backgroundTint="#22577A"
         android:contentDescription="Hapus item ini" />
 </LinearLayout>
+</LinearLayout>
+</RelativeLayout>
