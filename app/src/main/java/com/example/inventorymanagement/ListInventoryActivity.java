@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +18,10 @@ import java.util.List;
 
 public class ListInventoryActivity extends AppCompatActivity {
 
-    private static final String TAG = "ListInventoryActivity"; // Untuk log debugging
+    private static final String TAG = "ListInventoryActivity"; // Tag for debugging
     private RecyclerView recyclerView;
     private InventoryAdapter adapter;
-    private List<InventoryItem> inventoryList = new ArrayList<>();
+    private final List<InventoryItem> inventoryList = new ArrayList<>();
     private FirebaseFirestore db;
 
     @Override
@@ -28,65 +29,68 @@ public class ListInventoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_inventory);
 
-        // Inisialisasi Firestore
+        // Initialize Firestore
         db = FirebaseFirestore.getInstance();
 
-        // Konfigurasi RecyclerView
+        // Configure RecyclerView
         recyclerView = findViewById(R.id.recyclerViewInventory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Inisialisasi Adapter
+        // Initialize Adapter
         adapter = new InventoryAdapter(inventoryList, this::deleteInventory);
         recyclerView.setAdapter(adapter);
 
-        // Memuat data inventaris
+        // Load inventory data
         loadInventory();
     }
 
     /**
-     * Memuat daftar inventaris dari Firestore.
+     * Loads the inventory list from Firestore.
      */
-
     private void loadInventory() {
         CollectionReference inventoryRef = db.collection("inventory");
 
         inventoryRef.get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        inventoryList.clear(); // Membersihkan daftar sebelum memuat ulang
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        inventoryList.clear(); // Clear the list before reloading
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String id = document.getId();
                             String itemName = document.getString("itemName");
 
-                            if (itemName != null) { // Cek jika field itemName tidak kosong
+                            if (itemName != null && !itemName.trim().isEmpty()) { // Check if 'itemName' is not null or empty
                                 inventoryList.add(new InventoryItem(id, itemName));
                             } else {
-                                Log.e(TAG, "Field 'itemName' kosong di dokumen: " + id);
+                                Log.e(TAG, "Field 'itemName' is missing or empty in document: " + id);
                             }
                         }
-                        // Memberi tahu adapter bahwa data telah berubah
+                        // Notify the adapter about data changes
                         adapter.notifyDataSetChanged();
                     } else {
-                        Log.e(TAG, "Gagal mengambil data: ", task.getException());
-                        Toast.makeText(this, "Gagal memuat inventaris", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Failed to fetch data: ", task.getException());
+                        Toast.makeText(this, "Failed to load inventory", Toast.LENGTH_SHORT).show();
                     }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error retrieving inventory: ", e);
+                    Toast.makeText(this, "Error loading inventory", Toast.LENGTH_SHORT).show();
                 });
     }
 
     /**
-     * Menghapus item inventaris berdasarkan ID.
+     * Deletes an inventory item by its ID.
      *
-     * @param id ID dokumen di Firestore.
+     * @param id Document ID in Firestore.
      */
-    private void deleteInventory(String id) {
+    private void deleteInventory(@NonNull String id) {
         db.collection("inventory").document(id).delete()
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Item inventaris berhasil dihapus", Toast.LENGTH_SHORT).show();
-                    loadInventory(); // Memuat ulang data setelah penghapusan
+                    Toast.makeText(this, "Inventory item deleted successfully", Toast.LENGTH_SHORT).show();
+                    loadInventory(); // Reload data after deletion
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Gagal menghapus dokumen: ", e);
-                    Toast.makeText(this, "Gagal menghapus item inventaris", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Failed to delete document: ", e);
+                    Toast.makeText(this, "Failed to delete inventory item", Toast.LENGTH_SHORT).show();
                 });
     }
 }

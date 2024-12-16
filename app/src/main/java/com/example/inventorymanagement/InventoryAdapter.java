@@ -9,30 +9,34 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder> {
 
     private List<InventoryItem> inventoryList;
-    private OnDeleteClickListener onDeleteClickListener;
+    private final OnDeleteClickListener onDeleteClickListener;
 
     /**
-     * Interface untuk menangani aksi hapus item.
+     * Interface for handling delete actions.
      */
     public interface OnDeleteClickListener {
         void onDeleteClick(String id);
     }
 
     /**
-     * Konstruktor untuk InventoryAdapter.
+     * Constructor for InventoryAdapter.
+     *
+     * @param inventoryList          List of inventory items.
+     * @param onDeleteClickListener  Listener for delete button actions.
      */
     public InventoryAdapter(List<InventoryItem> inventoryList, OnDeleteClickListener onDeleteClickListener) {
-        this.inventoryList = inventoryList != null ? inventoryList : new java.util.ArrayList<>(); // Null safety
+        this.inventoryList = inventoryList != null ? inventoryList : new ArrayList<>(); // Null safety
         this.onDeleteClickListener = onDeleteClickListener;
     }
 
     /**
-     * Membuat ViewHolder untuk RecyclerView.
+     * Creates a ViewHolder for RecyclerView items.
      */
     @NonNull
     @Override
@@ -42,15 +46,14 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     }
 
     /**
-     * Mengikat data ke ViewHolder.
+     * Binds data to the ViewHolder.
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         InventoryItem item = inventoryList.get(position);
 
         if (item != null) { // Null safety
-            holder.tvItemName.setText(item.getItemName() != null ? item.getItemName() : "No Name"); // Handle itemName kosong
-
+            holder.tvItemName.setText(item.getItemName() != null ? item.getItemName() : "No Name Available"); // Fallback for missing name
             holder.btnDelete.setOnClickListener(v -> {
                 if (onDeleteClickListener != null) {
                     onDeleteClickListener.onDeleteClick(item.getId());
@@ -60,7 +63,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     }
 
     /**
-     * Mendapatkan jumlah item dalam RecyclerView.
+     * Returns the total number of items in the list.
      */
     @Override
     public int getItemCount() {
@@ -68,17 +71,19 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
     }
 
     /**
-     * Metode untuk memperbarui data dalam adapter.
+     * Updates the inventory data in the adapter and refreshes the view.
+     *
+     * @param newInventoryList The updated inventory list.
      */
     public void setAdapterData(List<InventoryItem> newInventoryList) {
-        if (newInventoryList != null) {
+        if (newInventoryList != null && !newInventoryList.equals(this.inventoryList)) {
             this.inventoryList = newInventoryList;
             notifyDataSetChanged();
         }
     }
 
     /**
-     * Kelas ViewHolder untuk mengikat view di item layout.
+     * ViewHolder class for binding item views.
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvItemName;

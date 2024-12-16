@@ -40,6 +40,10 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation("androidx.core:core-ktx:1.12.0") // Core KTX untuk FileProvider
+    implementation("androidx.camera:camera-core:1.4.1")
+    implementation("androidx.camera:camera-camera2:1.4.1")
+    implementation("androidx.camera:camera-lifecycle:1.4.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

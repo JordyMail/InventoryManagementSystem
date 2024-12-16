@@ -1,33 +1,30 @@
 package com.example.inventorymanagement;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class InventoryItem {
     private String id;
     private String itemName;
 
     /**
-     * Konstruktor default diperlukan untuk deserialisasi Firestore atau DataSnapshot.
+     * Default constructor required for Firestore deserialization or DataSnapshot.
      */
     public InventoryItem() {
-        // Default constructor
+        // Default constructor for Firebase deserialization
     }
 
     /**
-     * Konstruktor dengan parameter.
-     * @param id ID dari item inventaris.
-     * @param itemName Nama dari item inventaris.
+     * Constructor with parameters.
+     * @param id ID of the inventory item.
+     * @param itemName Name of the inventory item.
      */
     public InventoryItem(String id, String itemName) {
-        if (id == null || id.isEmpty()) {
-            throw new IllegalArgumentException("ID tidak boleh kosong");
-        }
-        if (itemName == null || itemName.isEmpty()) {
-            throw new IllegalArgumentException("Nama item tidak boleh kosong");
-        }
         this.id = id;
         this.itemName = itemName;
     }
 
-    // Getter
+    // Getter methods
     public String getId() {
         return id;
     }
@@ -36,7 +33,7 @@ public class InventoryItem {
         return itemName;
     }
 
-    // Setter
+    // Setter methods
     public void setId(String id) {
         this.id = id;
     }
@@ -46,7 +43,24 @@ public class InventoryItem {
     }
 
     /**
-     * Representasi objek sebagai string untuk debugging/logging.
+     * Converts the object to a map for Firestore.
+     */
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("itemName", itemName); // Add itemName to the map
+        return map;
+    }
+
+    /**
+     * A method to validate the inventory item data before adding it to Firestore.
+     * @return true if the item is valid, false otherwise.
+     */
+    public boolean isValid() {
+        return itemName != null && !itemName.trim().isEmpty();
+    }
+
+    /**
+     * String representation of the object for debugging/logging.
      */
     @Override
     public String toString() {

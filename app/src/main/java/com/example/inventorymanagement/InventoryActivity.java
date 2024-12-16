@@ -17,9 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import java.util.ArrayList;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class InventoryActivity extends AppCompatActivity {
@@ -32,26 +32,26 @@ public class InventoryActivity extends AppCompatActivity {
     private Button btnSave;
 
     private Uri photoUri;
-    private List<Map<String, Object>> inventoryList; // List untuk menyimpan item inventaris
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
-        // Inisialisasi list inventaris
-        inventoryList = new ArrayList<>();
+        // Initialize Firestore
+        db = FirebaseFirestore.getInstance();
 
-        // Menghubungkan komponen UI
+        // Initialize UI components
         ivPhoto = findViewById(R.id.ivPhoto);
         etItemName = findViewById(R.id.etItemName);
         etPlace = findViewById(R.id.etPlace);
         etDescription = findViewById(R.id.etDescription);
         btnSave = findViewById(R.id.btnSave);
 
-        // Set listener untuk foto
+        // Set listener for photo click
         ivPhoto.setOnClickListener(v -> {
-            // Cek izin akses kamera
+            // Check for camera permission
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 openCamera();
             } else {
@@ -59,7 +59,7 @@ public class InventoryActivity extends AppCompatActivity {
             }
         });
 
-        // Logika tombol simpan
+        // Set listener for save button click
         btnSave.setOnClickListener(v -> saveInventory());
     }
 
@@ -67,8 +67,12 @@ public class InventoryActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_IMAGE_CAPTURE && photoUri != null) {
-                ivPhoto.setImageURI(photoUri); // Menampilkan foto yang diambil
+            if (requestCode == REQUEST_IMAGE_CAPTURE) {
+                if (data != null && data.getExtras() != null) {
+                    // Set the image URI to ivPhoto
+                    photoUri = data.getData();
+                    ivPhoto.setImageURI(photoUri);
+                }
             }
         }
     }
@@ -76,9 +80,12 @@ public class InventoryActivity extends AppCompatActivity {
     private void openCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create a file URI for the photo
+            Uri photoURI = Uri.parse("file://path/to/photo"); // This should be replaced with the actual file path if storing the photo in storage
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         } else {
-            Toast.makeText(this, "Kamera tidak tersedia", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Camera not available", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -87,36 +94,38 @@ public class InventoryActivity extends AppCompatActivity {
         String place = etPlace.getText().toString().trim();
         String description = etDescription.getText().toString().trim();
 
-        // Validasi input
+        // Validate input
         if (itemName.isEmpty() || place.isEmpty() || description.isEmpty()) {
-            Toast.makeText(this, "Harap isi semua kolom", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Membuat map untuk menyimpan data inventaris
+        // Create a map for storing inventory data
         Map<String, Object> inventory = new HashMap<>();
         inventory.put("itemName", itemName);
         inventory.put("place", place);
         inventory.put("description", description);
         inventory.put("photoUri", photoUri != null ? photoUri.toString() : null);
 
-        // Menambahkan item baru ke dalam list inventaris
-        inventoryList.add(inventory);
+        // Add the inventory item to Firestore
+        db.collection("inventory")
+                .add(inventory)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Inventory item added successfully", Toast.LENGTH_SHORT).show();
+                    clearFields();  // Clear the input fields after saving
 
-        // Memberi notifikasi kepada pengguna
-        Toast.makeText(this, "Inventaris berhasil disimpan!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to add item", Toast.LENGTH_SHORT).show();
+                });
+    }
 
-        // Mengosongkan input setelah menyimpan
+    private void clearFields() {
+        // Clear input fields after saving
         etItemName.setText("");
         etPlace.setText("");
         etDescription.setText("");
-        ivPhoto.setImageResource(R.drawable.merah); // Reset area foto
-
-        // Opsional, menampilkan atau mencatat daftar inventaris yang diperbarui
-        // Sebagai contoh, mencatat daftar inventaris saat ini:
-        for (Map<String, Object> item : inventoryList) {
-            System.out.println(item);
-        }
+        ivPhoto.setImageResource(R.drawable.merah);  // Reset photo
     }
 
     @Override
@@ -126,7 +135,7 @@ public class InventoryActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openCamera();
             } else {
-                Toast.makeText(this, "Izin kamera diperlukan untuk mengambil foto", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Camera permission is required to take a photo", Toast.LENGTH_SHORT).show();
             }
         }
     }
