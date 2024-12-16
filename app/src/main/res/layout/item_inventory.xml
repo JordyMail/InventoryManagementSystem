@@ -1,15 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- res/layout/inventory_item_layout.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="12dp"
-    android:gravity="center"
-    android:layout_centerInParent="true"
-    >
+    android:gravity="center_vertical"
+    android:layout_centerInParent="true">
 
-    <!-- TextView untuk Nama Item -->
+    <ImageView
+        android:id="@+id/ivItemImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="12dp"/>
+
     <TextView
         android:id="@+id/tvItemName"
         android:layout_width="0dp"
@@ -21,7 +24,15 @@
         android:padding="4dp"
         android:textStyle="bold" />
 
-    <!-- Tombol Hapus -->
+    <TextView
+        android:id="@+id/tvItemNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:textColor="#22577A"
+        android:padding="4dp" />
+
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
@@ -30,6 +41,5 @@
         android:text="Delete"
         android:textColor="@android:color/white"
         android:backgroundTint="#22577A"
-        android:contentDescription="Hapus item ini" />
+        android:contentDescription="Delete this item" />
 </LinearLayout>
-

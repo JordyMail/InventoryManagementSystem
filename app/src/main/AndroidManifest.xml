@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Camera Feature Declaration -->
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="false" />
+        android:required="true" /> <!-- Change this to true if the camera is essential for your app -->
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InventoryManagement"
         tools:targetApi="31">
+
+        <!-- Activities -->
         <activity
             android:name=".InventoryActivity"
             android:exported="false" />
@@ -41,14 +46,14 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- File Provider for Camera Access -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
+            android:authorities="com.example.inventorymanagement.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -32,9 +32,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Item Name"
+            android:textColor="@color/black"
             android:layout_marginBottom="12dp"
             android:inputType="textPersonName"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <!-- Place Input -->
         <EditText
@@ -42,9 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Place"
+            android:textColor="@color/black"
             android:layout_marginBottom="12dp"
             android:inputType="text"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <!-- Description Input -->
         <EditText
@@ -54,9 +56,21 @@
             android:hint="Description Inventory"
             android:layout_marginBottom="16dp"
             android:inputType="textMultiLine"
+            android:textColor="@color/black"
             android:gravity="top"
             android:lines="4"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
+        <!-- Number of Items Input -->
+        <EditText
+            android:id="@+id/etItemCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Number of Items"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/black"
+            android:inputType="number"
+            android:textStyle="bold" />
 
         <!-- Save Button -->
         <Button
