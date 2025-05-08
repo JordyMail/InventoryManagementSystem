@@ -31,3 +31,5 @@ This project is an **Inventory Management System**, designed to efficiently trac
 
 For more details on each module, refer to the individual README files inside the respective project directories.
 
+##image
+
