@@ -32,5 +32,5 @@ This project is an **Inventory Management System**, designed to efficiently trac
 For more details on each module, refer to the individual README files inside the respective project directories.
 
 ## image
-<img src="https://github.com/user-attachments/assets/c93933f7-3c15-4cfa-afb7-eecd61fc4952" width="250" height="auto">
-
+<img src="" width="250" height="auto">
+<img src="" width="250" height="auto">
