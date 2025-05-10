@@ -1,13 +1,12 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+# This workflow uses actions provided by third parties and includes caching
+# for optimal use in GitHub Actions to improve execution time.
+# It builds a Java project using Gradle and submits dependency information for Dependabot Alerts.
+# For more details, visit: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
 name: Java CI with Gradle
 
 on:
+  # Triggers the workflow on push or pull request events to the 'main' branch
   push:
     branches: [ "main" ]
   pull_request:
@@ -15,53 +14,56 @@ on:
 
 jobs:
   build:
-
+    # Defines the environment to run the job
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: read # Grants read-only access to repository content
 
     steps:
+    # Step 1: Check out the code from the repository
     - uses: actions/checkout@v4
+
+    # Step 2: Set up the Java Development Kit (JDK) version 17
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
-    # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
+    # Step 3: Make the Gradle Wrapper script executable to avoid permission issues
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+
+    # Step 4: Set up Gradle and prepare caching for dependencies
+    # This uses a specific version of the Gradle setup action
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
+    # Step 5: Build the project using the Gradle Wrapper
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
-    # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
-    #
-    # - name: Setup Gradle
-    #   uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
-    #   with:
-    #     gradle-version: '8.9'
-    #
-    # - name: Build with Gradle 8.9
-    #   run: gradle build
-
   dependency-submission:
-
+    # Defines the environment to run the job
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # Grants write permissions to submit the dependency graph
 
     steps:
+    # Step 1: Check out the code from the repository
     - uses: actions/checkout@v4
+
+    # Step 2: Set up the Java Development Kit (JDK) version 17
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
-    # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
+    # Step 3: Make the Gradle Wrapper script executable to avoid permission issues
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+
+    # Step 4: Generate and submit the dependency graph for Dependabot Alerts
     - name: Generate and submit dependency graph
       uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
